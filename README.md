@@ -4,7 +4,7 @@ Bu proje, modern ve klasik şifreleme algoritmalarının çalışma mantığın�
 
 Proje, gerçek dünyadaki güvenli iletişim protokollerine (örn. HTTPS/TLS) benzer şekilde, **Hibrit Kriptosistem** (Asimetrik + Simetrik Şifreleme) yaklaşımını simüle eder.
 
-![Ana Arayüz](screenshots/arayüz.png)
+![Ana Arayüz](screenshots/arayuz.png)
 
 
 ##  Projenin Amacı
