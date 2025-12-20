@@ -32,9 +32,9 @@ Proje, gerçek dünyadaki güvenli iletişim protokollerine (örn. HTTPS/TLS) be
 Kullanıcı bir yöntem seçer, mesaj ve anahtar girer. Sistem, veriyi şifreler ve sunucuya iletmek üzere paketler. Alt kısımdaki panel, ağ trafiğindeki şifreli veriyi simüle eder.
 
 
-(screenshots/Aesşifreleme.png)
-(screenshots/Hillşifreleme.png)
-(screenshots/arayüz.png)
+![AES Şifreleme](screenshots/aes-sifreleme.png)
+![Hill Şifreleme](screenshots/hill-sifreleme.png)
+![Uygulama Arayüzü](screenshots/arayuz.png)
 
 ## Kullanılan Teknolojiler
 
