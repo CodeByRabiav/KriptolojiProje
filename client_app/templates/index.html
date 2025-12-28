@@ -6,14 +6,12 @@
     <title>Kripto Proje - Ultimate Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    
     <style>
         body { background: linear-gradient(135deg, #4c1d95 0%, #1e1b4b 100%); color: white; min-height: 100vh; font-family: 'Inter', sans-serif; }
         .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
         .card-active { border: 2px solid #fbbf24 !important; background: rgba(251, 191, 36, 0.2) !important; transform: scale(1.02); }
         .method-card { transition: all 0.3s ease; cursor: pointer; }
         .method-card:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-5px); }
-        /* Özel kaydırma çubuğu */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #1e1b4b; }
         ::-webkit-scrollbar-thumb { background: #4c1d95; border-radius: 10px; }
@@ -32,83 +30,48 @@
                 <i class="fas fa-layer-group mr-3 text-yellow-400"></i> Şifreleme Algoritması Seçin
             </h2>
             
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4" id="methods">
-                
-                <div onclick="window.selectMethod('AES', this)" class="method-card glass p-4 rounded-2xl text-center card-active">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="methods">
+                <div onclick="window.selectMethod('AES', this)" class="method-card glass p-4 rounded-2xl text-center card-active border-t-2 border-cyan-500/30">
                     <i class="fas fa-shield-halved text-3xl mb-3 text-cyan-400"></i>
-                    <h3 class="font-bold text-sm">AES-128</h3>
+                    <h3 class="font-bold text-sm">AES-128 (Kütüphane)</h3>
                 </div>
-
-                <div onclick="window.selectMethod('DES', this)" class="method-card glass p-4 rounded-2xl text-center">
+                <div onclick="window.selectMethod('DES', this)" class="method-card glass p-4 rounded-2xl text-center border-t-2 border-blue-500/30">
                     <i class="fas fa-lock text-3xl mb-3 text-blue-400"></i>
-                    <h3 class="font-bold text-sm">DES</h3>
+                    <h3 class="font-bold text-sm">DES (Kütüphane)</h3>
                 </div>
-
-                <div onclick="window.selectMethod('RSA', this)" class="method-card glass p-4 rounded-2xl text-center">
+                <div onclick="window.selectMethod('RSA', this)" class="method-card glass p-4 rounded-2xl text-center border-t-2 border-red-500/30">
                     <i class="fas fa-key text-3xl mb-3 text-red-400"></i>
                     <h3 class="font-bold text-sm">RSA</h3>
                 </div>
 
+                <div onclick="window.selectMethod('AES_Manual', this)" class="method-card glass p-4 rounded-2xl text-center border-2 border-dashed border-yellow-500/50">
+                    <i class="fas fa-microchip text-3xl mb-3 text-yellow-500"></i>
+                    <h3 class="font-bold text-sm">AES Manual</h3>
+                    <p class="text-[10px] text-gray-400 mt-1 uppercase">S-Box & Round Yapısı</p>
+                </div>
+                <div onclick="window.selectMethod('DES_Manual', this)" class="method-card glass p-4 rounded-2xl text-center border-2 border-dashed border-blue-500/50">
+                    <i class="fas fa-microchip text-3xl mb-3 text-blue-500"></i>
+                    <h3 class="font-bold text-sm">DES Manual</h3>
+                    <p class="text-[10px] text-gray-400 mt-1 uppercase">8-Byte & S-Box</p>
+                </div>
+
+                
                 <div onclick="window.selectMethod('Caesar', this)" class="method-card glass p-4 rounded-2xl text-center border-t-2 border-orange-500/30">
                     <i class="fas fa-redo text-3xl mb-3 text-orange-400"></i>
                     <h3 class="font-bold text-sm">Caesar</h3>
                 </div>
-
-                <div onclick="window.selectMethod('Substitution', this)" class="method-card glass p-4 rounded-2xl text-center border-t-2 border-pink-500/30">
-                    <i class="fas fa-shuffle text-3xl mb-3 text-pink-400"></i>
-                    <h3 class="font-bold text-sm">Substitution</h3>
-                </div>
-
                 <div onclick="window.selectMethod('Vigenere', this)" class="method-card glass p-4 rounded-2xl text-center border-t-2 border-green-500/30">
                     <i class="fas fa-font text-3xl mb-3 text-green-400"></i>
                     <h3 class="font-bold text-sm">Vigenère</h3>
                 </div>
-
-                <div onclick="window.selectMethod('Affine', this)" class="method-card glass p-4 rounded-2xl text-center border-t-2 border-indigo-500/30">
-                    <i class="fas fa-calculator text-3xl mb-3 text-indigo-400"></i>
-                    <h3 class="font-bold text-sm">Affine</h3>
-                </div>
-
-                <div onclick="window.selectMethod('Playfair', this)" class="method-card glass p-4 rounded-2xl text-center">
-                    <i class="fas fa-chess-board text-3xl mb-3 text-purple-400"></i>
-                    <h3 class="font-bold text-sm">Playfair</h3>
-                </div>
-
-                <div onclick="window.selectMethod('Polybius', this)" class="method-card glass p-4 rounded-2xl text-center">
-                    <i class="fas fa-border-all text-3xl mb-3 text-sky-400"></i>
-                    <h3 class="font-bold text-sm">Polybius</h3>
-                </div>
-
-                <div onclick="window.selectMethod('RailFence', this)" class="method-card glass p-4 rounded-2xl text-center border-t-2 border-yellow-500/30">
-                    <i class="fas fa-stairs text-3xl mb-3 text-yellow-500"></i>
-                    <h3 class="font-bold text-sm">Rail Fence</h3>
-                </div>
-
-                <div onclick="window.selectMethod('Route', this)" class="method-card glass p-4 rounded-2xl text-center border-t-2 border-emerald-500/30">
-                    <i class="fas fa-arrows-split-up-and-left text-3xl mb-3 text-emerald-400"></i>
-                    <h3 class="font-bold text-sm">Route</h3>
-                </div>
-
-                <div onclick="window.selectMethod('Columnar', this)" class="method-card glass p-4 rounded-2xl text-center border-t-2 border-amber-500/30">
-                    <i class="fas fa-table-columns text-3xl mb-3 text-amber-500"></i>
-                    <h3 class="font-bold text-sm">Columnar</h3>
-                </div>
-
-                <div onclick="window.selectMethod('Hill', this)" class="method-card glass p-4 rounded-2xl text-center">
+                <div onclick="window.selectMethod('Hill', this)" class="method-card glass p-4 rounded-2xl text-center border-t-2 border-teal-500/30">
                     <i class="fas fa-table-cells text-3xl mb-3 text-teal-400"></i>
                     <h3 class="font-bold text-sm">Hill</h3>
                 </div>
-
-                <div onclick="window.selectMethod('OneTimePad', this)" class="method-card glass p-4 rounded-2xl text-center">
-                    <i class="fas fa-user-secret text-3xl mb-3 text-lime-400"></i>
-                    <h3 class="font-bold text-sm">One Time Pad</h3>
+                <div onclick="window.selectMethod('Substitution', this)" class="method-card glass p-4 rounded-2xl text-center border-t-2 border-pink-500/30">
+                    <i class="fas fa-shuffle text-3xl mb-3 text-pink-400"></i>
+                    <h3 class="font-bold text-sm">Substitution</h3>
                 </div>
-
-                <div onclick="window.selectMethod('Pigpen', this)" class="method-card glass p-4 rounded-2xl text-center">
-                    <i class="fas fa-shapes text-3xl mb-3 text-rose-400"></i>
-                    <h3 class="font-bold text-sm">Pigpen</h3>
-                </div>
-
             </div>
         </div>
 
@@ -118,10 +81,16 @@
                     <i class="fas fa-pen-nib mr-2 text-cyan-400"></i> Veri Girişi
                 </h2>
                 <textarea id="msg" class="w-full bg-black/30 border border-gray-600 rounded-2xl p-4 mb-4 text-white focus:ring-2 focus:ring-cyan-500 outline-none transition" rows="4" placeholder="Şifrelenecek mesajı buraya yazın..."></textarea>
-                <input id="key" type="text" class="w-full bg-black/30 border border-gray-600 rounded-2xl p-4 mb-6 text-white focus:ring-2 focus:ring-cyan-500 outline-none transition" placeholder="Anahtar (Sayı, Kelime veya Matris)...">
+                
+                <div class="relative flex items-center mb-6">
+                    <input id="key" type="text" class="w-full bg-black/30 border border-gray-600 rounded-2xl p-4 text-white focus:ring-2 focus:ring-cyan-500 outline-none transition pr-12" placeholder="Anahtar ">
+                    <button onclick="window.generateKey()" class="absolute right-3 text-yellow-500 hover:text-yellow-400 transition transform hover:rotate-180" title="Rastgele Anahtar Üret">
+                        <i class="fas fa-dice-five text-2xl"></i>
+                    </button>
+                </div>
                 
                 <button onclick="window.send()" class="w-full bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-cyan-500 hover:to-blue-600 text-white font-black py-4 rounded-2xl shadow-xl transition-all active:scale-95">
-                    <i class="fas fa-paper-plane mr-2"></i> ŞİFRELE VE SUNUCUYA GÖNDER
+                    <i class="fas fa-paper-plane mr-2"></i> ŞİFRELE VE GÖNDER
                 </button>
             </div>
 
@@ -131,19 +100,16 @@
                 </h2>
                 <div class="space-y-4">
                     <div>
-                        <p class="text-xs text-gray-400 uppercase tracking-widest mb-2 font-bold">RSA Encrypted Session Key:</p>
+                        <p class="text-xs text-gray-400 uppercase tracking-widest mb-2 font-bold">RSA Encrypted Session Key (Anahtar Dağıtımı):</p>
                         <div id="resKey" class="break-all bg-black/40 p-3 rounded-xl text-xs font-mono text-yellow-200 border border-white/5"></div>
                     </div>
                     <div>
-                        <p class="text-xs text-gray-400 uppercase tracking-widest mb-2 font-bold">Payload (Ciphertext):</p>
+                        <p class="text-xs text-gray-400 uppercase tracking-widest mb-2 font-bold">Payload (Ciphertext / Base64):</p>
                         <div id="resMsg" class="break-all bg-black/40 p-3 rounded-xl text-sm font-mono text-cyan-300 border border-white/5"></div>
                     </div>
-                    <div class="flex items-center text-xs text-green-500 mt-4">
-                        <span class="relative flex h-2 w-2 mr-2">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                        </span>
-                        Paket başarıyla yakalandı ve sunucuya iletildi.
+                    <div class="flex items-center text-xs text-green-500 mt-4 italic">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        Hibrit yapı: RSA ile anahtar taşınmış, veri seçilen yöntemle şifrelenmiştir.
                     </div>
                 </div>
             </div>
@@ -154,29 +120,74 @@
         let selectedMethod = 'AES';
 
         window.selectMethod = function(methodName, element) {
-            console.log("Yöntem Değiştirildi:", methodName);
             selectedMethod = methodName;
             document.querySelectorAll('#methods > div').forEach(div => div.classList.remove('card-active'));
             element.classList.add('card-active');
         };
+        
+        
+window.generateKey = function () {
+    const keyInput = document.getElementById('key');
 
+   
+    if (
+        selectedMethod === 'AES' ||
+        selectedMethod === 'DES' ||
+        selectedMethod === 'AES_Manual' ||
+        selectedMethod === 'DES_Manual'
+    ) {
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        let res = "";
+        for (let i = 0; i < 16; i++) {
+            res += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        keyInput.value = res;
+        return;
+    }
+
+  
+    if (selectedMethod === 'Caesar') {
+        keyInput.value = Math.floor(Math.random() * 25) + 1;
+        return;
+    }
+
+    if (selectedMethod === 'Vigenere') {
+        const words = ["KEY", "CRYPTO", "SECURE", "VIGENERE", "HELLO"];
+        keyInput.value = words[Math.floor(Math.random() * words.length)];
+        return;
+    }
+
+   
+    if (selectedMethod === 'Hill') {
+    keyInput.value = "3,3,2,5";
+    return;
+    }
+
+
+
+    if (selectedMethod === 'Substitution') {
+        const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+        for (let i = alphabet.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [alphabet[i], alphabet[j]] = [alphabet[j], alphabet[i]];
+        }
+        keyInput.value = alphabet.join("");
+        return;
+    }
+};
+
+  
         window.send = async function() {
             const msgInput = document.getElementById('msg');
             const keyInput = document.getElementById('key');
             const resultPanel = document.getElementById('result');
 
-            if (!msgInput.value || !keyInput.value) {
-                alert("Uyarı: Lütfen hem mesajı hem de anahtarı doldurun!");
+            if (!msgInput.value) {
+                alert("Lütfen mesaj alanını doldurun!");
                 return;
             }
 
             try {
-                
-                const keyRes = await fetch('/fetch_key');
-                if(!keyRes.ok) throw new Error("Sunucu anahtar isteğine cevap vermedi.");
-                const keyData = await keyRes.json();
-
-                
                 const res = await fetch('/process', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
@@ -187,21 +198,19 @@
                     })
                 });
 
-                if(!res.ok) throw new Error("Şifreleme motoru hata döndürdü.");
                 const data = await res.json();
+                if(data.error) throw new Error(data.error);
 
-               
-                
+                if(data.used_key) keyInput.value = data.used_key;
+
                 resultPanel.classList.remove('hidden');
-                document.getElementById('resKey').innerText = data.encrypted_key_rsa || "N/A (Sadece Asimetrik)";
+                document.getElementById('resKey').innerText = data.encrypted_key_rsa || "N/A (Sadece RSA Modu)";
                 document.getElementById('resMsg').innerText = data.encrypted_message;
-                
                 
                 resultPanel.scrollIntoView({ behavior: 'smooth' });
 
             } catch (error) {
-                console.error("Hata Detayı:", error);
-                alert("Sistem Hatası: " + error.message);
+                alert("Hata: " + error.message);
             }
         };
     </script>

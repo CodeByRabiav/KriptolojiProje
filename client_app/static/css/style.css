@@ -55,7 +55,6 @@ input:focus, textarea:focus {
     box-shadow: 0 4px 15px rgba(14, 116, 144, 0.4);
 }
 
-/* Wireshark Panel Animasyonu */
 #result {
     animation: fadeIn 0.5s ease-out;
 }

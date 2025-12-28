@@ -11,6 +11,84 @@ class CryptoStrategy:
     def decrypt(self, text, key): pass
 
 
+class AESManualStrategy(CryptoStrategy):
+    def __init__(self):
+        
+        self.s_box = {i: (i * 7 + 3) % 256 for i in range(256)}
+        self.inv_s_box = {v: k for k, v in self.s_box.items()}
+
+    def encrypt(self, text, key):
+        data = [ord(c) for c in text]
+        round_key = sum(ord(c) for c in key) % 256 if key else 42
+
+       
+        step1 = [x ^ round_key for x in data]
+
+       
+        step2 = [self.s_box[x] for x in step1]
+
+       
+        step3 = step2[::-1]
+
+        return base64.b64encode(bytes(step3)).decode()
+
+    def decrypt(self, text, key):
+        data = list(base64.b64decode(text))
+        round_key = sum(ord(c) for c in key) % 256 if key else 42
+
+       
+        step1 = data[::-1]
+
+       
+        step2 = [self.inv_s_box[x] for x in step1]
+
+       
+        step3 = [x ^ round_key for x in step2]
+
+        return "".join(chr(x) for x in step3)
+
+
+
+class DESManualStrategy(CryptoStrategy):
+    def __init__(self):
+        self.s_box = {i: (i * 5 + 11) % 256 for i in range(256)}
+        self.inv_s_box = {v: k for k, v in self.s_box.items()}
+
+    def encrypt(self, text, key):
+        data = [ord(c) for c in text]
+        round_key = sum(ord(c) for c in key) % 256 if key else 77
+
+       
+        step1 = data[::-1]
+
+        
+        step2 = [self.s_box[x] for x in step1]
+
+        
+        step3 = [x ^ round_key for x in step2]
+
+        return base64.b64encode(bytes(step3)).decode()
+
+    def decrypt(self, text, key):
+        data = list(base64.b64decode(text))
+        round_key = sum(ord(c) for c in key) % 256 if key else 77
+
+        
+        step1 = [x ^ round_key for x in data]
+
+      
+        step2 = [self.inv_s_box[x] for x in step1]
+
+       
+        step3 = step2[::-1]
+
+        return "".join(chr(x) for x in step3)
+
+
+      
+
+
+
 class AESLibraryStrategy(CryptoStrategy):
     def encrypt(self, text, key):
         cipher = AES.new(pad(key.encode().ljust(16)[:16], 16), AES.MODE_ECB)
@@ -28,7 +106,7 @@ class DESLibraryStrategy(CryptoStrategy):
         return unpad(cipher.decrypt(base64.b64decode(text)), 8).decode()
 
 class RSALibraryStrategy(CryptoStrategy):
-    
+   
     def encrypt(self, text, key):
         recipient_key = RSA.import_key(key)
         cipher_rsa = PKCS1_OAEP.new(recipient_key)
@@ -86,15 +164,31 @@ class AffineStrategy(CryptoStrategy):
 
 class HillCipherStrategy(CryptoStrategy):
     def encrypt(self, text, key):
-        k = np.array(list(map(int, key.split(',')))).reshape(2, 2)
+
+       
+        nums = list(map(int, key.split()))
+
+        if len(nums) != 4:
+            raise ValueError("Hill anahtarı 2x2 matris olmalı (örn: 3 3 2 5)")
+
+        k = np.array(nums).reshape(2, 2)
+
         text = text.upper().replace(" ", "")
-        if len(text) % 2 != 0: text += "X"
+        if len(text) % 2 != 0:
+            text += "X"
+
         res = ""
         for i in range(0, len(text), 2):
-            v = np.array([ord(text[i])-65, ord(text[i+1])-65])
+            v = np.array([
+                ord(text[i]) - 65,
+                ord(text[i + 1]) - 65
+            ])
+
             enc = np.dot(k, v) % 26
-            res += chr(int(enc[0])+65) + chr(int(enc[1])+65)
+            res += chr(int(enc[0]) + 65) + chr(int(enc[1]) + 65)
+
         return res
+
 
 class RailFenceStrategy(CryptoStrategy):
     def encrypt(self, text, key):
@@ -136,5 +230,3 @@ class OneTimePadStrategy(CryptoStrategy):
     def encrypt(self, text, key):
         return "".join([chr(ord(t) ^ ord(key[i % len(key)])) for i, t in enumerate(text)])
 
-class AESManualStrategy(CryptoStrategy):
-    def encrypt(self, text, key): return f"Manual-AES({text[:5]}...)"
