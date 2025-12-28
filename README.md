@@ -33,7 +33,7 @@ Kullanıcı bir yöntem seçer, mesaj ve anahtar girer. Sistem, veriyi şifreler
 
 
 ![AES Şifreleme](screenshots/aes-sifreleme.png)
-![Hill Şifreleme](screenshots/hill-sifreleme.png)
+
 ![Uygulama Arayüzü](screenshots/arayuz.png)
 
 ## Kullanılan Teknolojiler
